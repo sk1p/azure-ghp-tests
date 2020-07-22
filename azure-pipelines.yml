@@ -1,0 +1,25 @@
+trigger:
+- master
+
+- job: deploy docs
+  pool:
+    vmImage: 'ubuntu-latest'
+  steps:
+  - task: UsePythonVersion@0
+    displayName: 'Use Python $(python.version)'
+    inputs:
+      versionSpec: '3.8'
+  - bash: sudo apt install -y pandoc
+    displayName: install required debian packages
+  - bash: pip install -U ghp-import click
+    displayName: 'install requirements'
+  - bash: mkdir 'html'
+    displayName: 'make output dir'
+  - bash: echo '<strong>Hello world!</strong>' > html/index.html
+    displayName: 'build docs'
+  - bash: ./deploy-docs --repo sk1p/azure-ghp-tests
+    displayName: 'deploy docs'
+    condition: |
+        and(not(eq(variables['Build.Reason'], 'PullRequest')),
+            eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
