@@ -19,7 +19,7 @@ import click
               show_default=True)
 @click.argument('html-dir', nargs=1, type=click.Path(exists=True, dir_okay=True, file_okay=False))
 def deploy(token, repo, html_dir):
-    url = 'https://%s@github.com/%s.git' % (token, repo)
+    url = 'git@github.com:%s.git' % (token, repo)
     cmd = ['ghp-import', '-p', '-f', '-n', '-m', 'Deploy docs', '-r', url, html_dir]
     print(subprocess.check_output(cmd).decode("utf-8"))
 

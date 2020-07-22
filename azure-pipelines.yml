@@ -19,6 +19,17 @@ jobs:
     displayName: 'make output dir'
   - bash: echo '<strong>Hello world!</strong>' > html/index.html
     displayName: 'build docs'
+
+  - task: DownloadSecureFile@1
+    inputs:
+      secureFile: deploy_key
+    displayName: 'Get the deploy key'
+
+  - script: |
+      mkdir ~/.ssh && mv $DOWNLOADSECUREFILE_SECUREFILEPATH ~/.ssh/id_rsa
+      chmod 700 ~/.ssh && chmod 600 ~/.ssh/id_rsa
+      ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+
   - bash: ./deploy_docs --repo sk1p/azure-ghp-tests html
     displayName: 'deploy docs'
     condition: |
