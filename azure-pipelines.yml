@@ -14,6 +14,7 @@ jobs:
     displayName: install required debian packages
   - bash: pip install -U ghp-import click
     displayName: 'install requirements'
+  - bash: git remote -v
   - bash: mkdir 'html'
     displayName: 'make output dir'
   - bash: echo '<strong>Hello world!</strong>' > html/index.html
