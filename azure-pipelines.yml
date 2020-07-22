@@ -17,6 +17,7 @@ jobs:
   - bash: git remote -v
   - bash: mkdir 'html'
     displayName: 'make output dir'
+  - bash: env
   - bash: echo '<strong>Hello world!</strong>' > html/index.html
     displayName: 'build docs'
 
