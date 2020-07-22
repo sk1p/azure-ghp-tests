@@ -1,6 +1,7 @@
 trigger:
 - master
 
+jobs:
 - job: deploy docs
   pool:
     vmImage: 'ubuntu-latest'
