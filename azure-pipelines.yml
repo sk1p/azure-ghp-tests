@@ -18,7 +18,7 @@ jobs:
     displayName: 'make output dir'
   - bash: echo '<strong>Hello world!</strong>' > html/index.html
     displayName: 'build docs'
-  - bash: ./deploy-docs --repo sk1p/azure-ghp-tests
+  - bash: ./deploy_docs --repo sk1p/azure-ghp-tests
     displayName: 'deploy docs'
     condition: |
         and(not(eq(variables['Build.Reason'], 'PullRequest')),
